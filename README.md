@@ -5,7 +5,7 @@
 - Jumbo Jaramilo Ivannova Michelle
 - Li Xuetao
 
-## 1. INTRODUCTION
+## 1. Introduction
 
 This project implements an autonomous mobile robot that navigates to GPS target points while avoiding obstacles using LiDAR.
 
@@ -22,7 +22,7 @@ Key Technologies
 - IMU (MagneticField)
 - LiDAR (LaserScan)
 
-## 2. SYSTEM ARCHITECTURE
+## 2. System Architecture
 
 The system is composed of three main modules:
 
@@ -56,7 +56,7 @@ roslaunch velodyne_pointcloud VLP16_points.launch
 python gpsfinalObs_3.1.py
 ```
 
-## 4. ALGORITHM
+## 4. Algorithm
 
 Navigation Logic
 - Get current GPS position
@@ -75,7 +75,7 @@ State Switching
 - Navigation Mode: No obstacle
 - Avoidance Mode: Obstacle detected
 
-## 5. RESULTS
+## 5. Results
 
 The robot successfully:
 
@@ -84,7 +84,7 @@ The robot successfully:
 - Switches between navigation and avoidance modes
 - Maintains stable motion without oscillation
 
-## 6. TROUBLESHOOTING & PRACTICAL ISSUES
+## 6. Troubleshooting and Practical Issues
 
 1. Robot Oscillates (Left-Right Movement)
 - Problem:
@@ -118,7 +118,7 @@ The robot successfully:
    Reduce obstacle threshold
    Allow slow forward movement
 
-## 7. CONCLUSION
+## 7. Conclusion
 
 This project demonstrates a complete autonomous navigation pipeline combining:
 
@@ -128,7 +128,7 @@ Orientation estimation (IMU)
 
 The system successfully balances global navigation and local obstacle avoidance, forming a foundation for more advanced autonomous robotic systems.
 
-## 8. FUTURE WORK
+## 8. Future Work
    Add SLAM for indoor navigation
    Implement path planning (A*, DWA)
    Improve control using PID
