@@ -1,5 +1,12 @@
 # Autonomous Robot Navigation (GPS + LiDAR)
 
+## Team Members
+
+- Jumbo Jaramilo Ivannova Michelle
+- Li Xuetao
+
+## 1. INTRODUCTION
+
 This project implements an autonomous mobile robot that navigates to GPS target points while avoiding obstacles using LiDAR.
 
 The robot:
@@ -8,38 +15,121 @@ The robot:
 - Avoids obstacles using LiDAR
 - Combines navigation and obstacle avoidance
 
-## Team Members
-- Jumbo Jaramilo Ivannova Michelle
-- Li Xuetao
+Key Technologies
+- ROS1 (Robot Operating System)
+- Python (rospy)
+- GPS (NavSatFix)
+- IMU (MagneticField)
+- LiDAR (LaserScan)
 
-## System Components
+## 2. SYSTEM ARCHITECTURE
 
-- GPS (/gnss)
-- IMU (/imu/mag)
-- LiDAR (/scan)
-- ROS (Robot Operating System)
+The system is composed of three main modules:
 
-## Algorithm
+   1. GPS Navigation Module
+      Computes distance to target using Haversine formula
+      Calculates heading toward target
+   2. IMU Orientation Module
+      Estimates robot orientation (north angle)
+      Used to align robot with target direction
+   3. LiDAR Obstacle Avoidance Module
+      Detects obstacles in front/left/right directions
+      Overrides navigation when necessary
 
-1. Get target GPS coordinate
-2. Compute heading and distance
-3. Read LiDAR data
-4. Decision:
-   - If obstacle detected → avoid
-   - Else → move toward target
-
-## How to Run
+## 3. How to Run
 
 ```bash
-# Enable CAN
+# 1. Connect to Robot
+ssh agilex@192.168.1.102
+
+# 2. Enable CAN
 sudo modprobe gs_usb
 sudo ip link set can0 up type can bitrate 500000
 
-# Launch robot
+# 3. Launch robot
 roslaunch scout_bringup scout_minimal.launch
 
-# Start LiDAR
+# 4. Start LiDAR
 roslaunch velodyne_pointcloud VLP16_points.launch
 
-# Run program
+# 5. Run program
 python gpsfinalObs_3.1.py
+
+## 4. ALGORITHM
+
+Navigation Logic
+- Get current GPS position
+- Compute distance and heading to target
+- Compare heading with current orientation
+- Rotate until aligned
+- Move forward
+
+Obstacle Avoidance Logic
+- Read LiDAR data
+- Detect obstacles in front
+- Choose direction (left/right)
+- Override GPS control
+
+State Switching
+- Navigation Mode: No obstacle
+- Avoidance Mode: Obstacle detected
+
+## 5. RESULTS
+
+The robot successfully:
+
+- Navigates to multiple GPS targets
+- Avoids obstacles in real time
+- Switches between navigation and avoidance modes
+- Maintains stable motion without oscillation
+
+## 6. TROUBLESHOOTING & PRACTICAL ISSUES
+
+1. Robot Oscillates (Left-Right Movement)
+- Problem:
+   Robot moves forward but swings left and right.
+- Cause:
+   Simultaneous turning and forward motion.
+- Solution:
+   Separate turning and forward movement.
+   Only move forward when aligned.
+
+2. Robot Spins in Place
+- Cause:
+   Heading threshold too strict.
+- Solution:
+   Increase devlimit (e.g., 20 → 30 degrees)
+
+3. /gnss Topic Missing
+
+-Cause: GPS driver not running
+-Solution:
+   rostopic list
+   Ensure GPS node is active.
+
+4. Robot Skips Target Points
+- Cause: Target threshold too large
+- Solution:
+   Reduce targetstopdistance (e.g., 3 → 2 meters)
+5. Robot Gets Stuck in Avoidance
+- Cause: Obstacle always detected
+- Solution:
+   Reduce obstacle threshold
+   Allow slow forward movement
+
+## 7. CONCLUSION
+
+This project demonstrates a complete autonomous navigation pipeline combining:
+
+Global positioning (GPS)
+Local sensing (LiDAR)
+Orientation estimation (IMU)
+
+The system successfully balances global navigation and local obstacle avoidance, forming a foundation for more advanced autonomous robotic systems.
+
+## 8. FUTURE WORK
+   Add SLAM for indoor navigation
+   Implement path planning (A*, DWA)
+   Improve control using PID
+   Integrate full ROS Navigation Stack
+   Add camera-based perception
