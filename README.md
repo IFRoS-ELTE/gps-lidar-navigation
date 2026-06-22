@@ -75,7 +75,41 @@ State Switching
 - Navigation Mode: No obstacle
 - Avoidance Mode: Obstacle detected
 
-## 5. Results
+## 5. Simulation & Real-World Performance
+
+# Simulation Tools:
+During development, an online simulator, Robotics Learning Studio, was used to prototype and test obstacle avoidance behavior.
+
+The simulation environment allowed rapid testing of:
+- Basic obstacle avoidance strategies
+- Turning logic (left/right decision)
+- Forward motion control
+
+This significantly accelerated early-stage development before deploying to the real robot.
+
+# Simulation vs Real-World Differences
+
+Although the simulation provided useful initial validation, several key differences were observed when transitioning to the real robot:
+
+1. GPS Dependency
+In simulation, robot positioning is precise and noise-free
+In real-world scenarios, GPS introduces:
+- Noise
+- Drift
+- Inconsistent target coordinates across sessions
+Robot may stop too early or overshoot targets.
+
+2. Obstacle Representation
+- Simulation uses idealized obstacle shapes
+- Real-world obstacles vary significantly in size and geometry
+
+Observed Behavior:
+|Obstacle Type  | Performance          |
+|---------------|----------------------|
+| Thin objects (e.g., poles)  | Successfully avoided    |
+| Wide objects (e.g., trees)  | Avoidance failed or inefficient   |
+
+## 6. Results
 
 The robot successfully:
 
@@ -84,7 +118,7 @@ The robot successfully:
 - Switches between navigation and avoidance modes
 - Maintains stable motion without oscillation
 
-## 6. Troubleshooting and Practical Issues
+## 7. Troubleshooting and Practical Issues
 
 1. Robot Oscillates (Left-Right Movement)
 - Problem:
@@ -118,7 +152,7 @@ The robot successfully:
    Reduce obstacle threshold
    Allow slow forward movement
 
-## 7. Conclusion
+## 8. Conclusion
 
 This project demonstrates a complete autonomous navigation pipeline combining:
 
@@ -128,7 +162,7 @@ Orientation estimation (IMU)
 
 The system successfully balances global navigation and local obstacle avoidance, forming a foundation for more advanced autonomous robotic systems.
 
-## 8. Future Work
+## 9. Future Work
    Add SLAM for indoor navigation
    Implement path planning (A*, DWA)
    Improve control using PID
