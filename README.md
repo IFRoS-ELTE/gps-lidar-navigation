@@ -77,7 +77,7 @@ State Switching
 
 ## 5. Simulation & Real-World Performance
 
-# Simulation Tools:
+Simulation Tools:
 During development, an online simulator, Robotics Learning Studio, was used to prototype and test obstacle avoidance behavior.
 
 The simulation environment allowed rapid testing of:
@@ -87,7 +87,7 @@ The simulation environment allowed rapid testing of:
 
 This significantly accelerated early-stage development before deploying to the real robot.
 
-# Simulation vs Real-World Differences
+Simulation vs Real-World Differences
 
 Although the simulation provided useful initial validation, several key differences were observed when transitioning to the real robot:
 
