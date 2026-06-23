@@ -163,8 +163,11 @@ Orientation estimation (IMU)
 The system successfully balances global navigation and local obstacle avoidance, forming a foundation for more advanced autonomous robotic systems.
 
 ## 9. Future Work
-   Add SLAM for indoor navigation
-   Implement path planning (A*, DWA)
-   Improve control using PID
-   Integrate full ROS Navigation Stack
-   Add camera-based perception
+- Add SLAM for indoor navigation
+- Implement path planning (A*, DWA)
+- Improve control using PID
+- Integrate full ROS Navigation Stack
+- Add camera-based perception
+
+## 10. It might be usefull
+It is important to mention that it was used an online robot simulator tool such as “Robotics Learning Studio,” but unfortunately, when it comes to the actual application, it does not work the same way, mainly due to the use of GPS. However, this simulation environment proved to be a valuable asset: it allowed me to validate the navigation logic and test obstacle avoidance in configurable scenarios when a physical testing area was unavailable at home. This "simulation-first" approach acted as a critical pre-validation phase, demonstrating that even with hardware limitations, it is possible to iterate and refine autonomous behaviors effectively before deploying in real-world, variable environments.
